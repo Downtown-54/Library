@@ -1,0 +1,82 @@
+<ul>
+  <li><a routerLink="/">Главная</a></li>
+  <li><a routerLink="/book">Книги</a></li>
+  <li><a class="active" routerLink="/reader">Читатели</a></li>
+</ul>
+<br>
+<div style="overflow:auto;">
+  <table id="searchTable">
+    <thead><tr><th>Читатель</th><th>Дата рождения</th><th>Телефон</th><th>Эл почта</th><th>Адрес</th><th>Статус</th>
+      <th>Редактирование</th></tr></thead>
+      <tbody>
+              <tr *ngFor="let item of values">
+                  <td id="{{item.id}}" (click)="openIssuedBookForm(this.item.id)">{{item.reader}}</td>
+                  <td id="{{item.id}}" (click)="openIssuedBookForm(this.item.id)">{{item.dateBirth}}</td>
+                  <td id="{{item.id}}" (click)="openIssuedBookForm(this.item.id)">{{item.numberPhone}}</td>
+                  <td id="{{item.id}}" (click)="openIssuedBookForm(this.item.id)">{{item.email}}</td>
+                  <td id="{{item.id}}" (click)="openIssuedBookForm(this.item.id)">{{item.address}}</td>
+                  <td id="{{item.id}}" (click)="openIssuedBookForm(this.item.id)">{{item.status}}</td>
+                  <td>
+                      <button id="{{item.id}}" style="cursor: pointer; border: none; background-color: transparent;
+                      font-size: 18px;"
+                      (click)="openEditForm(this.item.id)">🖊</button></td>
+
+              </tr>
+
+      </tbody>
+  </table>
+</div>
+
+<div [ngStyle]="{display: AddFormDisplay()}" class="form-popup" id="addForm">
+  <form action="/AddReader" method="post" class="form-container">
+      <h1>Добавление читателя</h1>
+      <label style="font-size: 17;">ФИО</label>
+      <input type='text' name='reader' [(ngModel)]="addForm.reader" required/>
+      <label style="font-size: 17;">Дата рождения</label>
+      <input type='date' name='dateBirth' max="2022-10-11" [(ngModel)]="addForm.dateBirth" required/>
+      <label style="font-size: 17;">Телефон</label>
+      <input type='text' name='numberPhone' [(ngModel)]="addForm.numberPhone" required/>
+      <label style="font-size: 17;">Эл почта</label>
+      <input type='text' name='email' [(ngModel)]="addForm.email" required/>
+      <label style="font-size: 17;">Адрес</label>
+      <input type='text' name='address' [(ngModel)]="addForm.address" required/>
+      <input class="btn" type='submit' (click)="printAddForm()" value='Добавить читателя' />
+      <button type="button" class="btn cancel" (click)="change()">Закрыть без сохранения</button>
+  </form>
+</div>
+
+<div [ngStyle]="{display: EditFormDisplay()}" class="form-popup" id="editForm">
+  <form action="/UpdateReader" method="post" class="form-container" >
+      <h1>Редактирование читателя</h1>
+       <input hidden id="id" name='id' [(ngModel)]="editForm.id"/>
+      <label style="font-size: 17;">ФИО</label>
+      <input type='text' name='reader' [(ngModel)]="editForm.reader"/>
+      <label style="font-size: 17;">Дата рождения</label>
+      <input  type='date' name='dateBirth' max="2022-10-11" [(ngModel)]="editForm.dateBirth"/>
+      <label style="font-size: 17;">Телефон</label>
+      <input type='text' name='numberPhone' [(ngModel)]="editForm.numberPhone"/>
+      <label style="font-size: 17;">Эл почта</label>
+      <input type='text' name='email' [(ngModel)]="editForm.email"/>
+      <label style="font-size: 17;">Адрес</label>
+      <input type='text' name='address' [(ngModel)]="editForm.address"/>
+      <input class="btn" type='submit' (click)="printEditForm()" value='Обновить читателя' />
+      <button type="button" class="btn cancel" (click)="openEditForm(0)">Закрыть без сохранения</button>
+  </form>
+</div>
+
+<div [ngStyle]="{display: AddIssuedBookDisplay()}" class="form-popup" id="readerForm">
+  <form action="/AddIssuedBook" method="post" class="form-container">
+      <h1>Выдача книги</h1>
+      <input hidden id="idIssuedBook" name='id' [(ngModel)]="issuedBookForm.id"/>
+      <label style="font-size: 17;">Название книги</label>
+      <input type='text' name='nameBook' [(ngModel)]="issuedBookForm.nameBook" required/>
+      <label>Автор</label>
+       <input type='text' name='author' [(ngModel)]="issuedBookForm.author" required/>
+      <label style="font-size: 17;">Дата сдачи</label>
+      <input type='date' name='dateOfDelivery' min="2022-10-11" [(ngModel)]="issuedBookForm.dateOfDelivery" required/>
+      <input class="btn" type='submit' (click)="printIssuedBookForm()" value='Выдать книгу'/>
+      <button type="button" class="btn cancel" (click)="openIssuedBookForm(0)">Закрыть</button>
+  </form>
+</div>
+
+<a (click)="change()" class="add">+</a>

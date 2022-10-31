@@ -1,0 +1,73 @@
+<ul>
+  <li><a routerLink="/">Главная</a></li>
+  <li><a class="active" routerLink="/book">Книги</a></li>
+  <li><a routerLink="/reader">Читатели</a></li>
+</ul>
+<br>
+  <div style="overflow:auto;">
+    <table id="searchTable">
+      <thead><tr><th>Название книги</th><th>Автор</th><th>Артикул</th><th>Количество книг</th><th>Год издания</th>
+        <th>Статус книги</th><th>Редактирование</th></tr></thead>
+        <tbody>
+                <tr *ngFor="let item of values">
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Author}}</td>
+                    <td>{{item.VendorCode}}</td>
+                    <td>{{item.YearOfPublication}}</td>
+                    <td>{{item.Instances}}</td>
+                    <td>{{item.Status}}</td>
+                    <td>
+                        <button id="{{item.Id}}" style="cursor: pointer; border: none; background-color: transparent;
+                        font-size: 18px;"
+                        (click)="openEditForm(this.item.Id)">🖊</button>
+                    </td>
+
+                </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+<br />
+<div [ngStyle]="{display: AddFormDisplay()}" class="form-popup" id="addForm">
+  <form name="AddBook" class="form-container">
+      <h1>Добавление книги</h1>
+      <label>Наименование</label>
+      <input type="text" name="name" [(ngModel)]="addForm.name" required>
+      <label>Автор</label>
+      <input type='text' name='author' [(ngModel)]="addForm.author" required />
+      <label>Артикул</label>
+      <input type='text' name='vendorCode' [(ngModel)]="addForm.vendorCode" required />
+      <label>Год издания</label>
+      <input type='date' name='yearOfPublication' [(ngModel)]="addForm.yearOfPublication" required />
+      <label>Количество книг</label>
+      <input type="text" data-min="1" data-max="5000000" name='instances' [(ngModel)]="addForm.instances" required />
+      <input type='submit' class="btn" (click)="printAddForm()" value='Добавить книгу' />
+      <button type="button" class="btn cancel" (click)="change()">Закрыть без сохранения</button>
+  </form>
+</div>
+
+<div [ngStyle]="{display: EditFormDisplay()}" class="form-popup" id="editForm">
+  <form name="UpdateBook" class="form-container">
+      <h1>Редактирование книги</h1>
+      <label>Наименование</label>
+      <input id="name" type="text" name="name" [(ngModel)]="addForm.name"/>
+      <input hidden id="id" name='id' [(ngModel)]="addForm.id"/>
+      <label>Автор</label>
+      <input type='text' name='author' [(ngModel)]="addForm.author"/>
+      <label>Артикул</label>
+      <input type='text' name='vendorCode' [(ngModel)]="addForm.vendorCode"/>
+      <label>Год издания</label>
+      <input type='date' name='yearOfPublication' [(ngModel)]="addForm.yearOfPublication"/>
+      <label>Количество книг</label>
+      <input type='text' data-min="1" data-max="5000000" name='instances' [(ngModel)]="addForm.instances">
+      <input type='submit' class="btn" (click)="printEditForm()" value='Обновить книгу' />
+      <button type="button" class="btn cancel" (click)="openEditForm(0)">Закрыть без сохранения</button>
+  </form>
+</div>
+
+
+<a (click)="change()" class="add">+</a>
+
+

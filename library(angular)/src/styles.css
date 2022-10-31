@@ -1,0 +1,209 @@
+th {
+  border-bottom: 1px solid #ddd;
+  background-color: #f2f2f2;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  overflow: auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 200px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  height: 43;
+  top: 0;
+}
+
+li {
+  float: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+  li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      background-color: #333;
+      border: none;
+  }
+
+  li a:hover {
+      background-color: #f2f2f2;
+      color: black;
+  }
+  li form a  {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      background-color: #333;
+      border: none;
+  }
+
+  li form a:hover {
+      background-color: #f2f2f2;
+      color: black;
+  }
+
+.active {
+  background-color: #04AA6D;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#searchInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#searchTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+  #searchTable th, #searchTable td {
+      /*text-align: left;*/
+      padding: 12px;
+  }
+
+  #searchTable tr {
+      border-bottom: 1px solid #ddd;
+  }
+
+      #searchTable tr.header, #searchTable tr:hover {
+          background-color: #f1f1f1;
+      }
+
+.add {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 50px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  margin: auto;
+  bottom: 1%;
+  right: 1%;
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-popup {
+  /* display: none; */
+  position: fixed;
+  top: 5%;
+  left: 40%;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-container {
+  max-width: 400px;
+  padding: 10px;
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+  .form-container input[type=text], .form-container input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+  }
+
+      .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+          background-color: #ddd;
+          outline: none;
+      }
+
+  .form-container input[type=date], .form-container input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+  }
+
+      .form-container input[type=date]:focus, .form-container input[type=password]:focus {
+          background-color: #ddd;
+          outline: none;
+      }
+  .form-container input[type=number], .form-container input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+  }
+
+      .form-container input[type=number]:focus, .form-container input[type=password]:focus {
+          background-color: #ddd;
+          outline: none;
+      }
+
+  .form-container .btn {
+      background-color: #04AA6D;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 10px;
+      opacity: 0.8;
+  }
+  .form-container .cancel {
+      background-color: red;
+  }
+
+  .form-container .btn:hover, .open-button:hover {
+      opacity: 1;
+  }
+
+
