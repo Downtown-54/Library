@@ -1,8 +1,4 @@
-<ul>
-  <li><a routerLink="/">Главная</a></li>
-  <li><a class="active" routerLink="/book">Книги</a></li>
-  <li><a routerLink="/reader">Читатели</a></li>
-</ul>
+
 <br>
   <div style="overflow:auto;">
     <table id="searchTable">
@@ -17,9 +13,7 @@
                     <td>{{item.Instances}}</td>
                     <td>{{item.Status}}</td>
                     <td>
-                        <button id="{{item.Id}}" style="cursor: pointer; border: none; background-color: transparent;
-                        font-size: 18px;"
-                        (click)="openEditForm(this.item.Id)">🖊</button>
+                        <button (click)="openEditForm(this.item.Id)">🖊</button>
                     </td>
 
                 </tr>
@@ -30,7 +24,7 @@
 
 
 <br />
-<div [ngStyle]="{display: AddFormDisplay()}" class="form-popup" id="addForm">
+<div [ngStyle]="{display: this.statusAddForm}" class="form-popup" id="addForm">
   <form name="AddBook" class="form-container">
       <h1>Добавление книги</h1>
       <label>Наименование</label>
@@ -48,7 +42,7 @@
   </form>
 </div>
 
-<div [ngStyle]="{display: EditFormDisplay()}" class="form-popup" id="editForm">
+<div [ngStyle]="{display: this.statusEditForm}" class="form-popup" id="editForm">
   <form name="UpdateBook" class="form-container">
       <h1>Редактирование книги</h1>
       <label>Наименование</label>

@@ -1,6 +1,12 @@
 import { identifierName } from '@angular/compiler';
 import { Component, HostBinding,  OnInit } from '@angular/core';
-import { ServiceService } from '../service.service';
+import { ServiceReader } from '../reader.service';
+import { IssuedBookService } from '../issued-book.service';
+
+export enum StatusForm {
+  none = 'none',
+  block = 'block'
+}
 
 @Component({
   selector: 'app-reader',
@@ -38,10 +44,10 @@ export class ReaderComponent implements OnInit {
     dateOfDelivery: '',
   }
 
-  constructor(private serviceApi: ServiceService) {
-    this.statusAddForm = 'none';
-    this.statusEditForm = 'none';
-    this.statusIssuedBookForm = 'none';
+  constructor(private api: ServiceReader, private apiIssuedBook: IssuedBookService) {
+    this.statusAddForm = StatusForm.none;
+    this.statusEditForm = StatusForm.none;
+    this.statusIssuedBookForm = StatusForm.none;
   }
 
   ngOnInit(): void {
@@ -58,79 +64,86 @@ export class ReaderComponent implements OnInit {
     this.postValueIssuedBook();
   }
 
-  AddFormDisplay() {
-    return this.statusAddForm;
-  }
-  EditFormDisplay() {
-    return this.statusEditForm;
-  }
-  AddIssuedBookDisplay() {
-    return this.statusIssuedBookForm;
-  }
-
   change() {
-    if(this.statusAddForm == 'none')
+    if(this.statusAddForm == StatusForm.none)
     {
-      this.statusAddForm = 'block';
+      this.statusAddForm = StatusForm.block;
     }
     else
     {
-      this.statusAddForm = 'none';
+      this.addForm.reader = '';
+      this.addForm.dateBirth = '';
+      this.addForm.numberPhone = '';
+      this.addForm.email = '';
+      this.addForm.address = '';
+      this.statusAddForm = StatusForm.none;
     }
   }
   openEditForm(id: number) {
     this.editForm.id = id;
-    if(this.statusEditForm == 'none')
+    if(this.statusEditForm == StatusForm.none)
     {
-      this.statusEditForm = 'block';
+      this.statusEditForm = StatusForm.block;
     }
     else
     {
-      this.statusEditForm = 'none';
+      this.editForm.reader = '';
+      this.editForm.dateBirth = '';
+      this.editForm.numberPhone = '';
+      this.editForm.email = '';
+      this.editForm.address = '';
+      this.statusEditForm = StatusForm.none;
     }
+
   }
   openIssuedBookForm(id: number) {
     this.issuedBookForm.id = id;
-    if(this.statusIssuedBookForm == 'none')
+    if(this.statusIssuedBookForm == StatusForm.none && this.statusEditForm == StatusForm.none)
     {
-      this.statusIssuedBookForm = 'block';
+      this.statusIssuedBookForm = StatusForm.block;
     }
     else
     {
-      this.statusIssuedBookForm = 'none';
+      this.issuedBookForm.nameBook = '';
+      this.issuedBookForm.author = '';
+      this.issuedBookForm.dateOfDelivery = '';
+      this.statusIssuedBookForm = StatusForm.none;
     }
   }
 
   putValues() {
-    this.serviceApi.putData(this.editForm, "Reader").subscribe((response: any) => {
+    this.api.putData(this.editForm).subscribe((response: any) => {
        this.values = response;
     }, (error: any) => {
        console.log(error);
+       alert("Что-то пошло не так! Если это повторится, то обратитесь в службу поддержки");
       });
   }
 
   postValues() {
-    console.log(this.addForm);
-    this.serviceApi.postData(this.addForm, "Reader").subscribe((response: any) => {
+    this.api.postData(this.addForm).subscribe((response: any) => {
        this.values = response;
     }, (error: any) => {
        console.log(error);
+       alert("Что-то пошло не так! Если это повторится, то обратитесь в службу поддержки");
       });
   }
 
   postValueIssuedBook() {
-    this.serviceApi.postData(this.issuedBookForm, "IssuedBook").subscribe((response: any) => {
+    this.apiIssuedBook.postData(this.issuedBookForm).subscribe((response: any) => {
        this.values = response;
     }, (error: any) => {
        console.log(error);
+       alert("Что-то пошло не так! Если это повторится, то обратитесь в службу поддержки");
       });
   }
 
   getValues() {
-    this.serviceApi.getData("Reader").subscribe((response: any) => {
+    this.api.getData().subscribe((response: any) => {
        this.values = response;
     }, (error: any) => {
        console.log(error);
+       alert("Что-то пошло не так! Если это повторится, то обратитесь в службу поддержки");
       });
   }
 }

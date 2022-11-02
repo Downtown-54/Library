@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceService } from '../service.service';
+import { BookService } from '../book.service';
+
+export enum StatusForm {
+  none = 'none',
+  block = 'block'
+}
 
 @Component({
   selector: 'app-book',
@@ -29,9 +34,9 @@ export class BookComponent implements OnInit {
     instances: '',
   }
 
-  constructor(private serviceApi: ServiceService) {
-    this.statusAddForm = 'none';
-    this.statusEditForm = 'none';
+  constructor(private api: BookService) {
+    this.statusAddForm = StatusForm.none;
+    this.statusEditForm = StatusForm.none;
   }
 
   ngOnInit(): void {
@@ -44,58 +49,64 @@ export class BookComponent implements OnInit {
     this.putValues();
   }
 
-  AddFormDisplay() {
-    return this.statusAddForm;
-  }
-  EditFormDisplay() {
-    return this.statusEditForm;
-  }
-
   change() {
-    if(this.statusAddForm == 'none')
+    if(this.statusAddForm == StatusForm.none)
     {
-      this.statusAddForm = 'block';
+      this.statusAddForm = StatusForm.block;
     }
     else
     {
-      this.statusAddForm = 'none';
+      this.addForm.name = '';
+      this.addForm.author = '';
+      this.addForm.vendorCode = '';
+      this.addForm.yearOfPublication = '';
+      this.addForm.instances = '';
+      this.statusAddForm = StatusForm.none;
     }
   }
 
   openEditForm(id: number) {
     this.editForm.id = id;
-    if(this.statusEditForm == 'none')
+    if(this.statusEditForm == StatusForm.none)
     {
-      this.statusEditForm = 'block';
+      this.statusEditForm = StatusForm.block;
     }
     else
     {
-      this.statusEditForm = 'none';
+      this.editForm.name = '';
+      this.editForm.author = '';
+      this.editForm.vendorCode = '';
+      this.editForm.yearOfPublication = '';
+      this.editForm.instances = '';
+      this.statusEditForm = StatusForm.none;
     }
   }
 
   putValues() {
-    this.serviceApi.putData(this.editForm, "Book").subscribe((response: any) => {
+    this.api.putData(this.editForm).subscribe((response: any) => {
        this.values = response;
     }, (error: any) => {
        console.log(error);
+       alert("Что-то пошло не так! Если это повторится, то обратитесь в службу поддержки");
       });
   }
 
   postValues() {
-    this.serviceApi.postData(this.addForm, "Book").subscribe((response: any) => {
+    this.api.postData(this.addForm).subscribe((response: any) => {
        this.values = response;
     }, (error: any) => {
        console.log(error);
+       alert("Что-то пошло не так! Если это повторится, то обратитесь в службу поддержки");
       });
   }
 
   getValues() {
-    this.serviceApi.getData("Book").subscribe((response: any) => {
+    this.api.getData().subscribe((response: any) => {
        this.values = response;
        console.log(response);
     }, (error: any) => {
        console.log(error);
+       alert("Что-то пошло не так! Если это повторится, то обратитесь в службу поддержки");
       });
   }
 }

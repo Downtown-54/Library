@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  configUrlReader: 'https://localhost:7194/Reader',
+  configUrlBook: 'https://localhost:7194/Book',
+  configUrlIssuedBook: 'https://localhost:7194/IssuedBook'
 };
 
 /*

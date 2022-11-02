@@ -1,6 +1,7 @@
 using LibraryApi.DataDB;
 using LibraryApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 
 namespace LibraryApi.Controllers
@@ -9,6 +10,14 @@ namespace LibraryApi.Controllers
     [Route("[controller]")]
     public class IssuedBookController : ControllerBase
     {
+        private readonly IConfiguration Configuration;
+
+        public IssuedBookController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+
+        }
+
         /// <summary>
         /// Выдача книг
         /// </summary>
@@ -20,32 +29,10 @@ namespace LibraryApi.Controllers
         [HttpPost]
         public IEnumerable<Readers>? AddIssuedBook(string author, string nameBook, DateTime dateOfDelivery, int id)
         {
-            DatabaseContext db = new DatabaseContext();
             try
             {
-                var selectBook = db.Books.SingleOrDefault(b => b.Name == nameBook && b.Author == author);
-                var bookAdd = new IssuedBooks()
-                {
-                    IssuedDate = DateTime.Now,
-                    NameBook = selectBook.Id,
-                    Reader = id,
-                    DateOfDelivery = dateOfDelivery.ToUniversalTime()
-                };
-                db.IssuedBooks.Add(bookAdd);
-
-                db.SaveChanges();
-
-
-                List<Readers> readerArrey = new List<Readers>();
-                var selectReader = db.Readers.ToList() ?? new List<Readers>();
-                if (selectReader != null)
-                {
-                    foreach (var select in selectReader)
-                    {
-                        readerArrey.Add(select);
-                    }
-                }
-                return readerArrey;
+                var DbIssuedBook = new DbIssuedBook(Configuration);
+                return DbIssuedBook.AddIssuedBook(author, nameBook, dateOfDelivery, id);
             }
             catch
             {

@@ -2,12 +2,38 @@
 {
     public class Readers
     {
-        public int Id { get; set; }  // Идентификатор
-        public string? Reader { get; set; } // ФИО читателя
-        public DateTime DateBirth { get; set; } // Дата рождения
-        public string? NumberPhone { get; set; } // Номер телефона читателя
-        public string? Email { get; set; }  // Электронная почта читателя
-        public string? Address { get; set; } // Адрес прописки читателя
-        public int Status { get; set; } // Статус состояния читателя 
+        /// <summary>
+        /// Идентификатор читателя
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
+        /// ФИО читателя
+        /// </summary>
+        public string Reader { get; set; }
+        /// <summary>
+        /// Дата рождения
+        /// </summary>
+        public DateTime DateBirth { get; set; }
+        /// <summary>
+        /// Номер телефона читателя
+        /// </summary>
+        public string NumberPhone { get; set; }
+        /// <summary>
+        /// Электронная почта читателя
+        /// </summary>
+        public string Email { get; set; }
+        /// <summary>
+        /// Адрес прописки читателя
+        /// </summary>
+        public string Address { get; set; }
+        /// <summary>
+        /// Статус состояния читателя 
+        /// </summary>
+        public StatusReader Status { get; set; }
+        public enum StatusReader : byte
+        {
+            active,
+            archive
+        }
     }
 }

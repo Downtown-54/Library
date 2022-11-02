@@ -2,12 +2,38 @@
 {
     public class Books
     {
-        public int Id { get; set; } // Идентификатор
-        public string? Name { get; set; }  // Название книги
-        public string? Author { get; set; } // Автор
-        public string? VendorCode { get; set; } // Артикул
-        public DateTime YearOfPublication { get; set; } // Дата издания
-        public int Instances { get; set; } // Экземпляры
-        public int Status { get; set; } // Статус состояния книги
+        /// <summary>
+        /// Идентификатор книги
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
+        /// Название книги
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Автор
+        /// </summary>
+        public string Author { get; set; }
+        /// <summary>
+        /// Артикул
+        /// </summary>
+        public string VendorCode { get; set; }
+        /// <summary>
+        /// Дата издания
+        /// </summary>
+        public DateTime YearOfPublication { get; set; }
+        /// <summary>
+        /// Экземпляры
+        /// </summary>
+        public int Instances { get; set; }
+        /// <summary>
+        /// Статус состояния книги
+        /// </summary>
+        public StatusBook Status { get; set; }
+        public enum StatusBook : byte
+        {
+            active,
+            archive
+        }
     }
 }
