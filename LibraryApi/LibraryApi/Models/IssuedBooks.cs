@@ -25,6 +25,11 @@
         /// <summary>
         /// Статус состояния выданной книги 
         /// </summary>
-        public int StatusIssuedBook { get; set; }
+        public StatusIssuedBook Status { get; set; }
+        public enum StatusIssuedBook
+        {
+            Active,
+            Archive
+        }
     }
 }

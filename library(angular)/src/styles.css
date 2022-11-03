@@ -213,6 +213,8 @@ li {
       width: 100%;
       margin-bottom: 10px;
       opacity: 0.8;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 17px;
   }
   .form-container .cancel {
       background-color: red;

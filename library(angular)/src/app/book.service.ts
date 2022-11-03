@@ -10,16 +10,16 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   putData(params: HttpParams){
-    return  this.http.put(environment.configUrlBook, params,
+    return  this.http.put(environment.urlApi + "Book", params,
       {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}) });
   }
 
   postData(params: HttpParams){
-    return  this.http.post(environment.configUrlBook, params,
+    return  this.http.post(environment.urlApi + "Book", params,
         {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})});
   }
 
   getData(){
-    return this.http.get(environment.configUrlBook);
+    return this.http.get(environment.urlApi + "Book");
   }
 }

@@ -1,8 +1,7 @@
-﻿using LibraryApi.DataDB;
+﻿using LibraryApi.Data;
 using LibraryApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.PortableExecutable;
-using static LibraryApi.Models.Readers;
+using System.IO;
 
 namespace LibraryApi.Controllers
 {
@@ -10,14 +9,15 @@ namespace LibraryApi.Controllers
     [Route("[controller]")]
     public class ReaderController : ControllerBase
     {
-        private readonly IConfiguration Configuration;
+        private IDbRedaers _dbReader;
+        private readonly ILogger<BookController> _logger;
 
-        public ReaderController(IConfiguration configuration)
+        public ReaderController(IDbRedaers db, ILogger<BookController> logger)
         {
-            Configuration = configuration;
-
+            _dbReader = db;
+            _logger = logger;
         }
-        
+
         /// <summary>
         /// Получение читателей
         /// </summary>
@@ -27,11 +27,11 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var dbReader = new DbReader(Configuration);
-                return dbReader.GetReader();
+                return _dbReader.GetReader();
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError("Error in GetReader", ex);
                 return null;
             }
         }
@@ -50,11 +50,11 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var dbReader = new DbReader(Configuration);
-                return dbReader.AddReader(reader, dateBirth, numberPhone, email, address);
+                return _dbReader.AddReader(reader, dateBirth, numberPhone, email, address);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError("Error in AddReader", ex);
                 return null;
             }
         }
@@ -74,13 +74,15 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var dbReader = new DbReader(Configuration);
-                return dbReader.UpdateReader(id, reader, dateBirth, numberPhone, email, address);
+                return _dbReader.UpdateReader(id, reader, dateBirth, numberPhone, email, address);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError("Error in UpdateReader", ex);
                 return null;
             }
         }
     }
+
+
 }

@@ -1,6 +1,5 @@
 ﻿using LibraryApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 
 namespace LibraryApi.DataDB

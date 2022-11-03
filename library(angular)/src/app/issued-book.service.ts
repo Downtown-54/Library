@@ -9,7 +9,7 @@ export class IssuedBookService {
   constructor(private http: HttpClient) { }
 
   postData(params: HttpParams){
-    return  this.http.post(environment.configUrlIssuedBook, params,
+    return  this.http.post(environment.urlApi + "IssuedBook", params,
         {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})});
   }
 }

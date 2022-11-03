@@ -15,7 +15,6 @@
                     <td>
                         <button (click)="openEditForm(this.item.Id)">🖊</button>
                     </td>
-
                 </tr>
 
         </tbody>
@@ -33,7 +32,7 @@
       <input type='text' name='author' [(ngModel)]="addForm.author" required />
       <label>Артикул</label>
       <input type='text' name='vendorCode' [(ngModel)]="addForm.vendorCode" required />
-      <label>Год издания</label>
+      <label>Дата издания</label>
       <input type='date' name='yearOfPublication' [(ngModel)]="addForm.yearOfPublication" required />
       <label>Количество книг</label>
       <input type="text" data-min="1" data-max="5000000" name='instances' [(ngModel)]="addForm.instances" required />
@@ -52,7 +51,7 @@
       <input type='text' name='author' [(ngModel)]="addForm.author"/>
       <label>Артикул</label>
       <input type='text' name='vendorCode' [(ngModel)]="addForm.vendorCode"/>
-      <label>Год издания</label>
+      <label>Дата издания</label>
       <input type='date' name='yearOfPublication' [(ngModel)]="addForm.yearOfPublication"/>
       <label>Количество книг</label>
       <input type='text' data-min="1" data-max="5000000" name='instances' [(ngModel)]="addForm.instances">

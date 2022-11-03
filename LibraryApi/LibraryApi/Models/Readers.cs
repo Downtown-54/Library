@@ -30,10 +30,10 @@
         /// Статус состояния читателя 
         /// </summary>
         public StatusReader Status { get; set; }
-        public enum StatusReader : byte
+        public enum StatusReader
         {
-            active,
-            archive
+            Active,
+            Archive
         }
     }
 }

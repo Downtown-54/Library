@@ -1,4 +1,4 @@
-using LibraryApi.DataDB;
+using LibraryApi.Data;
 using LibraryApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -10,12 +10,13 @@ namespace LibraryApi.Controllers
     [Route("[controller]")]
     public class IssuedBookController : ControllerBase
     {
-        private readonly IConfiguration Configuration;
+        private IDbIssuedBook _dbIssuedBook;
+        private readonly ILogger<BookController> _logger;
 
-        public IssuedBookController(IConfiguration configuration)
+        public IssuedBookController(IDbIssuedBook db, ILogger<BookController> logger)
         {
-            Configuration = configuration;
-
+            _dbIssuedBook = db;
+            _logger = logger;
         }
 
         /// <summary>
@@ -31,11 +32,11 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var DbIssuedBook = new DbIssuedBook(Configuration);
-                return DbIssuedBook.AddIssuedBook(author, nameBook, dateOfDelivery, id);
+                return _dbIssuedBook.AddIssuedBook(author, nameBook, dateOfDelivery, id);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError("Error in AddIssuedBook", ex);
                 return null;
             }
         }

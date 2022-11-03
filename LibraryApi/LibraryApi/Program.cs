@@ -1,5 +1,10 @@
+using LibraryApi.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(); // добавл€ю сервисы CORS
+builder.Services.AddSingleton<IDbRedaers, DbReader>();
+builder.Services.AddSingleton<IDbBook, DbBook>();
+builder.Services.AddSingleton<IDbIssuedBook, DbIssuedBook>();
 
 // Add services to the container.
 

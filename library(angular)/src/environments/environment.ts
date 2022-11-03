@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  configUrlReader: 'https://localhost:7194/Reader',
-  configUrlBook: 'https://localhost:7194/Book',
-  configUrlIssuedBook: 'https://localhost:7194/IssuedBook'
+  urlApi: 'https://localhost:7194/',
 };
 
 /*

@@ -11,17 +11,17 @@ export class ServiceReader {
   constructor(private http: HttpClient) { }
 
   putData(params: HttpParams){
-    return  this.http.put(environment.configUrlReader, params,
+    return  this.http.put(environment.urlApi + "Reader", params,
       {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}) });
   }
 
   postData(params: HttpParams){
-    return  this.http.post(environment.configUrlReader, params,
+    return  this.http.post(environment.urlApi + "Reader", params,
         {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})});
   }
 
   getData(){
-    return this.http.get(environment.configUrlReader);
+    return this.http.get(environment.urlApi + "Reader");
   }
 
 }

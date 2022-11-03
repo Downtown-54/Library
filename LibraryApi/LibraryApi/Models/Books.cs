@@ -30,10 +30,10 @@
         /// Статус состояния книги
         /// </summary>
         public StatusBook Status { get; set; }
-        public enum StatusBook : byte
+        public enum StatusBook
         {
-            active,
-            archive
+            Active,
+            Archive
         }
     }
 }

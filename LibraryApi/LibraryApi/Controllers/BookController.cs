@@ -1,4 +1,4 @@
-﻿using LibraryApi.DataDB;
+﻿using LibraryApi.Data;
 using LibraryApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,12 +11,13 @@ namespace LibraryApi.Controllers
     [Route("[controller]")]
     public class BookController : Controller
     {
-        private readonly IConfiguration Configuration;
+        private IDbBook _dbBook;
+        private readonly ILogger<BookController> _logger;
 
-        public BookController(IConfiguration configuration)
+        public BookController(IDbBook db, ILogger<BookController> logger)
         {
-            Configuration = configuration;
-
+            _dbBook = db;
+            _logger = logger;
         }
 
         /// <summary>
@@ -28,11 +29,11 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var dbBook = new DbBook(Configuration);
-                return dbBook.GetBook();
+                return _dbBook.GetBook();
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError("Error in GetBook", ex);
                 return null;
             }
         }
@@ -51,11 +52,11 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var dbBook = new DbBook(Configuration);
-                return dbBook.AddBook(name, author, vendorCode, yearOfPublication, instances);
+                return _dbBook.AddBook(name, author, vendorCode, yearOfPublication, instances);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError("Error in AddBook", ex);
                 return null;
             }
 
@@ -76,11 +77,11 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var dbBook = new DbBook(Configuration);
-                return dbBook.UpdateBook(id, name, author, vendorCode, yearOfPublication, instances);
+                return _dbBook.UpdateBook(id, name, author, vendorCode, yearOfPublication, instances);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError("Error in UpdateBook", ex);
                 return null;
             }
         }
